@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>exercise1</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $.ajax({
+                url: "http://140.134.26.71:58080/web-prog/Hotels",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    var items = data.Infos.Info;
+                    for (var i = 0; i < items.length; i++) {
+                        var name = items[i].Name;
+                        var website = items[i].Website;
+                        var imgURL1 = items[i].Picture1;
+                        $("#attractions").append('<div class="polaroid"><a href="' + website + '"><img src="' + imgURL1 + '" height="200" width="200"><div class="container">' + items[i].Name + '</div></a></div>');
+                    }
+                },
+                error: function() {}
+            });
+        });
+    </script>
+    <style>
+        #attractions {
+            margin: 100px;
+            column-count: 5;
+            column-gap: 30px;
+        }
+
+        div.container {
+            margin-bottom: 20px;
+            padding: 10px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            font-style: oblique;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="attractions"></div>
+
+</body>
+
+</html>
